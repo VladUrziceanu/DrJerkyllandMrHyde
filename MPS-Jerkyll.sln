@@ -1,14 +1,18 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-
+Project("{A97050F9-D801-4C28-4FA8-D14C0D4F4CA4}") = "MPS-Jerkyll", "Assembly-CSharp.csproj", "{59E8B9D2-3F97-123F-ED30-8B4861D09996}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{59E8B9D2-3F97-123F-ED30-8B4861D09996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E8B9D2-3F97-123F-ED30-8B4861D09996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E8B9D2-3F97-123F-ED30-8B4861D09996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E8B9D2-3F97-123F-ED30-8B4861D09996}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

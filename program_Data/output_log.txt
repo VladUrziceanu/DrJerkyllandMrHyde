@@ -16,14 +16,27 @@ Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\pr
 Loading C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.466 seconds
+- Completed reload, in  0.467 seconds
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 59Hz; virtual: 3840x1080 at -1920,0
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.965290 ms
+UnloadTime: 1.925054 ms
+Trying to send command for object without authority.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to send command for object without authority.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to send command for object without authority.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 31d4 -> priority: 1 
-  Thread -> id: f3c -> priority: 1 
+  Thread -> id: 3f30 -> priority: 1 
+  Thread -> id: 3cd4 -> priority: 1 
+Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:7777}

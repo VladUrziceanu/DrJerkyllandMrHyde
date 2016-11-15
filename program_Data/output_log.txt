@@ -16,14 +16,30 @@ Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\pr
 Loading C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.467 seconds
+- Completed reload, in  0.513 seconds
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\b.bogdan913\Desktop\MPS\DrJerkyllandMrHyde-master\program_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.925054 ms
+The referenced script on this Behaviour (Game Object 'GameManager') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'GameManager') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'WallSpawner') is missing!
+ 
+(Filename:  Line: 1656)
+
+UnloadTime: 1.968983 ms
 Trying to send command for object without authority.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
@@ -35,8 +51,26 @@ Trying to send command for object without authority.
 Trying to send command for object without authority.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to send command for object without authority.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:7777}
+The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'WallSpawner') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.315392 ms
+
+Unloading 5243 unused Assets to reduce memory usage. Loaded Objects now: 212.
+Total: 16.010920 ms (FindLiveObjects: 0.393303 ms CreateObjectMapping: 0.846547 ms MarkObjects: 0.353891 ms  DeleteObjects: 14.405271 ms)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3f30 -> priority: 1 
-  Thread -> id: 3cd4 -> priority: 1 
-Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:7777}
+  Thread -> id: 3970 -> priority: 1 
+  Thread -> id: 3c10 -> priority: 1 

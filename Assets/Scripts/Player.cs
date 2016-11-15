@@ -12,9 +12,13 @@ public class Player : NetworkBehaviour
     public Sprite[] enemySpriter;
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
+
     [SyncVar]
     public float inverseMoveTime;
     private bool moving = false;
+
+    public int paraTime = 0;
+    public int lastEat = 0;
 
     public int firstMessage = -1;
 
@@ -69,7 +73,7 @@ public class Player : NetworkBehaviour
 
         if (aaaa == currentId)
         {
-            CmdChangeSpeed(20.0f);
+            CmdChangeSpeed(15.0f);
             CmdSetMrHide(1);
             mrHide = 1;
         }
@@ -105,7 +109,7 @@ public class Player : NetworkBehaviour
         if (NetworkServer.active)
         {
             //registering the server handler
-            //NetworkServer.RegisterHandler(chatMessage, ServerReceiveMessage);
+            NetworkServer.RegisterHandler(chatMessage, ServerReceiveMessage);
         }
         
         NetworkManager.singleton.client.RegisterHandler(chatMessage, ReceiveMessage);
@@ -118,12 +122,6 @@ public class Player : NetworkBehaviour
         timer = Random.Range(300, 700);
         CmdSetCurrentId((int)netId.Value);
         currentId = (int)netId.Value;
-
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        Destroy(gameObject);
     }
 
     private void initSprite()
@@ -132,6 +130,8 @@ public class Player : NetworkBehaviour
         enemySpriter = Resources.LoadAll<Sprite>("Enemy");
         int t = Random.Range(0, playerSpriter.Length);
         CmdChangeSprite(t);
+        CmdInitScore();
+        score = 0;
         GetComponent<SpriteRenderer>().sprite = playerSpriter[t];
     }
 
@@ -158,20 +158,7 @@ public class Player : NetworkBehaviour
         {
             randomPosition = new Vector3(0, q, 0);
         }
-        transform.position += randomPosition;
-    }
-	
-    private void onDisable()
-    {
-        
-    }
-
-    private void onTriggerEnter2D (Collider2D other)
-    {
-        //if(other.tag == "Player")
-       // {
-            //TODO: trateaza ciocnire cu inamic
-       // }
+        transform.position = randomPosition;
     }
 
     protected IEnumerator SmoothMovement(Vector3 end)
@@ -201,20 +188,27 @@ public class Player : NetworkBehaviour
         {
             moving = true;
             StartCoroutine(SmoothMovement(end));
+            lastEat = 1;
             return true;
         }
         else if (hit.collider.gameObject.GetComponent<Player>() != null)
         {
             p = hit.collider.gameObject.GetComponent<Player>();
-             if (mrHide == 1)
+            if (mrHide == 1 && lastEat == 1)
              {
                 moving = true;
                 StartCoroutine(SmoothMovement(end));
+                lastEat = 0;
                 CmdIncScore();
+                if (isLocalPlayer)
+                    paraTime = 200;
                 return true;
             } else
             {
-                return false;
+                moving = true;
+                StartCoroutine(SmoothMovement(end));
+                lastEat = 1;
+                return true;
             }
         } else
         {
@@ -223,12 +217,15 @@ public class Player : NetworkBehaviour
     }
     void OnGUI()
     {
-        Texture2D texture = new Texture2D(1, 1);
-        texture.SetPixel(0, 0, new Color(0,0,0));
-        texture.Apply();
-        GUI.skin.box.normal.background = texture;
-        GUI.Box(new Rect(50, 120, 100, 30), GUIContent.none);
-        GUI.Label(new Rect(50, 120, 100, 30), "Score: " + (score/2).ToString());
+        if (!isLocalPlayer)
+        {
+            Texture2D texture = new Texture2D(1, 1);
+            texture.SetPixel(0, 0, new Color(0, 0, 0));
+            texture.Apply();
+            GUI.skin.box.normal.background = texture;
+            GUI.Box(new Rect(50, 120, 100, 30), GUIContent.none);
+            GUI.Label(new Rect(50, 120, 100, 30), "Deaths: " + score.ToString());
+        }
     }
     [Command]
     public void CmdChangeSprite(int number)
@@ -272,17 +269,16 @@ public class Player : NetworkBehaviour
                 CmdSetTotalId(NetworkServer.connections.Count);
             }
         }
-            
+
         if (isServer && isLocalPlayer)
         {
             CmdDecrementTime();
             if (timer <= 0)
             {
-                firstMessage = Random.Range(currentId, currentId + totalIds);
-
+                firstMessage = Random.Range(currentId, currentId + NetworkServer.connections.Count);
                 if (firstMessage == currentId)
                 {
-                    CmdChangeSpeed(20.0f);
+                    CmdChangeSpeed(15.0f);
                     CmdSetMrHide(1);
                     GetComponent<SpriteRenderer>().sprite = enemySpriter[0];
                 } else
@@ -291,14 +287,10 @@ public class Player : NetworkBehaviour
                     CmdSetMrHide(0);
                     GetComponent<SpriteRenderer>().sprite = playerSpriter[playerLocalSprite];
                 }
-                // SendMessage(firstMessage);
                
                 IntegerMessage myMessage = new IntegerMessage();
-                //we are using the connectionId as player name only to exemplify
                 myMessage.value = firstMessage;
                 //sending to all connected clients
-               // NetworkServer.SendToAll(chatMessage, myMessage);
-               // NetworkServer.SendToClient(firstMessage, chatMessage, myMessage);
                 foreach (NetworkConnection element in NetworkServer.connections)
                 {
                     NetworkServer.SendToClient(element.connectionId, chatMessage, myMessage);
@@ -313,6 +305,9 @@ public class Player : NetworkBehaviour
         {
             return;
         }
+
+        if (paraTime != 0)
+            paraTime--;
 
         int horizontal = 0;
         int vertical = 0;
@@ -329,7 +324,7 @@ public class Player : NetworkBehaviour
         
         if ((horizontal != 0 || vertical != 0))
         {
-            if (!moving)
+            if (!moving && paraTime == 0)
             {
                 Move(horizontal, vertical, out hit);
             }            
